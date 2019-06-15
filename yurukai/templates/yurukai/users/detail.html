@@ -1,0 +1,13 @@
+{% extends 'yurukai/base.html' %}
+
+{% block content %}
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">{{ object.name }}</div>
+    <div class="panel-body">
+      {{object.id}}
+      {{object.bio}}
+    </div>
+  </div>
+</div>
+{% endblock %}
