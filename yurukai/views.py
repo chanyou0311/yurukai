@@ -18,3 +18,16 @@ def join_s_conf(request):
 
 def join_t_conf(request):
     return render(request, "yurukai/join_t_conf.html")
+
+
+def reg_s(request):
+    return render(request, "yurukai/reg_s.html")
+
+def reg_t(request):
+    return render(request, "yurukai/reg_t.html")
+
+def reg_s_conf(request):
+    return render(request, "yurukai/reg_s_conf.html")
+
+def reg_t_conf(request):
+    return render(request, "yurukai/reg_t_conf.html")
