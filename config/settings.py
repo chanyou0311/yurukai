@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = "hfus(-^b=i%7516p9ph=+iaq3imf(@e58oed4)lkz3&27$17fz"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("IS_DEBUG") == "True"
 
 ALLOWED_HOSTS = [os.environ.get("ALLOWED_HOST", "localhost")]
 
@@ -73,20 +73,28 @@ WSGI_APPLICATION = "config.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": "yurukai",
-        "USER": os.environ["MYSQL_USER"],
-        "PASSWORD": os.environ["MYSQL_PASSWORD"],
-        "HOST": os.environ.get("MYSQL_HOST", "localhost"),
-        "PORT": os.environ["MYSQL_PORT"],
-        "OPTIONS": {
-            "init_command": "SET sql_mode='NO_ENGINE_SUBSTITUTION'",
-            "charset": "utf8mb4",
-        },
+if DEBUG is True:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
     }
-}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.mysql",
+            "NAME": "yurukai",
+            "USER": os.environ["MYSQL_USER"],
+            "PASSWORD": os.environ["MYSQL_PASSWORD"],
+            "HOST": os.environ.get("MYSQL_HOST", "localhost"),
+            "PORT": os.environ["MYSQL_PORT"],
+            "OPTIONS": {
+                "init_command": "SET sql_mode='NO_ENGINE_SUBSTITUTION'",
+                "charset": "utf8mb4",
+            },
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
