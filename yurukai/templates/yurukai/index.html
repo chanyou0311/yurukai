@@ -4,13 +4,23 @@
 <div class="container">
   {% for object in object_list%}
   <div class="panel panel-default">
-    <div class="panel-heading">{{ object.name }}</div>
+    <div class="panel-heading">
+      <a href="/{{object.id}}">{{ object.name }}</a>
+    </div>
     <div class="panel-body">
       <p>エリア: {{ object.area.name }}</p>
+      {% if object.schedule_set.all %}
+        <p>開始日時: {{ object.schedule_set.all.0.start_time }}</p>
+        <p>参加人数: {{ object.schedule_set.all.0.members.count }}</p>
+      {% endif %}
+
+{% comment %}
       {% for schedule in object.schedule_set.all %}
       <p>開始日時: {{ schedule.start_time }}</p>
       <p>参加人数: {{ schedule.members.count }}</p>
       {% endfor %}
+{% endcomment %}
+
       </div>
     </div>
     {% endfor %}
