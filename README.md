@@ -5,4 +5,4 @@
 - pyenv
 - pip
 - pipenv
-
+- mysql
