@@ -1,0 +1,16 @@
+{% extends 'yurukai/base.html' %}
+
+{% block content %}
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">{{ object.name }}</div>
+    <div class="panel-body">
+      <p>エリア: {{ object.area.name }}</p>
+      {% for schedule in object.schedule_set.all %}
+      <p>開始日時: {{ schedule.start_time }}</p>
+      <p>参加人数: {{ schedule.members.count }}</p>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}
