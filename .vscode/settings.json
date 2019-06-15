@@ -1,0 +1,44 @@
+{
+  "editor.fontFamily": "Ricty",
+  "editor.fontSize": 14,
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  "editor.renderWhitespace": "boundary",
+  "emmet.includeLanguages": {
+    "django-html": "html"
+  },
+  "emmet.triggerExpansionOnTab": true,
+  "emmet.variables": {
+    "lang": "ja"
+  },
+  "[javascript]": {
+    "editor.tabSize": 2
+  },
+  "[json]": {
+    "editor.tabSize": 2
+  },
+  "[python]": {
+    "editor.tabSize": 4,
+    "editor.formatOnPaste": false,
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true
+  },
+  "python.venvPath": "./.venv",
+  "python.pythonPath": "./.venv/bin/python",
+  "python.formatting.provider": "black",
+  "python.linting.pylintEnabled": false,
+  "python.linting.flake8Enabled": true,
+  "python.linting.mypyEnabled": true,
+  "python.linting.lintOnSave": true,
+  "python.linting.flake8Args": [
+    "--max-line-length",
+    "120",
+    "--exclude",
+    ".git,.github,__pycache__,.venv,.mypy_cache,.vscode"
+  ],
+  "python.testing.unittestEnabled": false,
+  "files.autoSave": "afterDelay",
+  "python.testing.pyTestEnabled": true,
+  "python.testing.nosetestsEnabled": false
+}

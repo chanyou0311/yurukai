@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "ms-python.python",
+    "batisteo.vscode-django",
+    "esbenp.prettier-vscode",
+    "visualstudioexptteam.vscodeintellicode",
+    "davidhouchin.whitespace-plus",
+    "redhat.vscode-yaml"
+  ]
+}
+
