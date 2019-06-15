@@ -1,4 +1,4 @@
-from django.contrib.auth.base_user import AbstractUser
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
@@ -38,18 +38,18 @@ class Tag(AbstractModel):
 class Yurukai(AbstractModel):
     name = models.CharField(max_length=120)
     tag = models.ManyToManyField(Tag)
-    area = models.ForeignKey(Area)
+    area = models.ForeignKey(Area, on_delete=models.PROTECT)
 
 
 class Schedule(AbstractModel):
-    yurukai = models.ForeignKey(Yurukai)
+    yurukai = models.ForeignKey(Yurukai, on_delete=models.CASCADE)
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
     members = models.ManyToManyField(User, through="Entry")
 
 
 class Entry(AbstractModel):
-    user = models.ForeignKey(User)
-    schedule = models.ForeignKey(Schedule)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    schedule = models.ForeignKey(Schedule, on_delete=models.CASCADE)
     is_join = models.BooleanField()
     is_teacher = models.BooleanField()
