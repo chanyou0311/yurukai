@@ -2,12 +2,18 @@
 
 {% block content %}
 <div class="container">
-  <div class="panel panel-default">
-    <div class="panel-heading">{{ object.name }}</div>
-    <div class="panel-body">
-      {{object.id}}
-      {{object.bio}}
-    </div>
-  </div>
+
+  <h1>
+    {{ object.name }}
+  </h1>
+
+  <address>
+    <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> {{ object.area.name }}
+  </address>
+
+  <p>
+    {{ object.bio }}
+  </p>
+
 </div>
 {% endblock %}
