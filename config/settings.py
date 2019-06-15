@@ -75,11 +75,18 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "yurukai",
+        "USER": os.environ["MYSQL_USER"],
+        "PASSWORD": os.environ["MYSQL_PASSWORD"],
+        "HOST": os.environ.get("MYSQL_HOST", "localhost"),
+        "PORT": os.environ["MYSQL_PORT"],
+        "OPTIONS": {
+            "init_command": "SET sql_mode='NO_ENGINE_SUBSTITUTION'",
+            "charset": "utf8mb4",
+        },
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
