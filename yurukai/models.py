@@ -20,15 +20,22 @@ class AbstractModel(models.Model):
         abstract = True
 
 
+class Area(AbstractModel):
+    name = models.CharField(max_length=120, unique=True)
+
+
 class User(AbstractUser, AbstractModel):
-    name = models.CharField(_("Name of User"), blank=True, max_length=255)
+    name = models.CharField(_("Name of User"), max_length=120)
+    bio = models.TextField(blank=True)
+    area = models.ForeignKey(Area, on_delete=models.PROTECT, null=True)
 
     def __str__(self):
         return self.name
 
-
-class Area(AbstractModel):
-    name = models.CharField(max_length=120)
+    def save(self, *args, **kwargs):
+        if self.name == "":
+            self.name = self.username
+        super().save(*args, **kwargs)
 
 
 class Tag(AbstractModel):
@@ -37,7 +44,7 @@ class Tag(AbstractModel):
 
 class Yurukai(AbstractModel):
     name = models.CharField(max_length=120)
-    tag = models.ManyToManyField(Tag)
+    tag = models.ManyToManyField(Tag, blank=True)
     area = models.ForeignKey(Area, on_delete=models.PROTECT)
 
 
@@ -45,7 +52,7 @@ class Schedule(AbstractModel):
     yurukai = models.ForeignKey(Yurukai, on_delete=models.CASCADE)
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
-    members = models.ManyToManyField(User, through="Entry")
+    members = models.ManyToManyField(User, through="Entry", blank=True)
 
 
 class Entry(AbstractModel):
