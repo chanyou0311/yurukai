@@ -20,14 +20,19 @@
       </div>
     </nav>
     <div class="container">
+      {% for object in object_list%}
       <div class="panel panel-default">
-        <div class="panel-heading">ゆる会名</div>
-        <div class="panel-body">
-          <p>開催地</p>
-          <p>日時</p>
-          <p>参加者リスト</p>
+        <div class="panel-heading">{{ object.name }}</div>
+          <div class="panel-body">
+            <p>エリア: {{ object.area.name }}</p>
+            {% for schedule in object.schedule_set.all %}
+            <p>開始日時: {{ schedule.start_time }}</p>
+            <p>参加人数: {{ schedule.members.count }}</p>
+            {% endfor %}
+          </div>
         </div>
       </div>
+      {% endfor %}
     </div>
   </body>
 </html>
