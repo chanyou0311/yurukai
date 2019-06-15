@@ -1,7 +1,8 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
 
 from .models import Yurukai
+from .forms import YurukaiForm
 
 
 class IndexView(ListView):
@@ -12,6 +13,13 @@ class IndexView(ListView):
 class YurukaiDetailView(DetailView):
     model = Yurukai
     template_name = "yurukai/detail.html"
+
+
+class YurukaiCreateView(CreateView):
+    model = Yurukai
+    template_name = "yurukai/create.html"
+    form_class = YurukaiForm
+
 
 
 def about(request):
