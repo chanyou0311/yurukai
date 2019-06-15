@@ -145,5 +145,7 @@ AUTHENTICATION_BACKENDS = [
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-user-model
 AUTH_USER_MODEL = "yurukai.User"
 
+SITE_ID = os.environ.get("SITE_ID", 1)
+
 # LOGIN_URL = "/"
 # LOGIN_REDIRECT_URL = "/"
