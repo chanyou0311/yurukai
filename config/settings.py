@@ -25,7 +25,7 @@ SECRET_KEY = "hfus(-^b=i%7516p9ph=+iaq3imf(@e58oed4)lkz3&27$17fz"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [os.environ.get("ALLOWED_HOST", "localhost")]
 
 
 # Application definition
