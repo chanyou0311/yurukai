@@ -26,47 +26,66 @@
       <div class="panel panel-default">
         <div class="panel-heading">ゆる会登録</div>
         <div class="panel-body">
-          <div class="form-group">
-            <label>ゆる会名</label>
-            <input type="text" class="form-control" placeholder="初めの第一歩">
-          </div>
-          <div class="dropdown">
-            <label>学びたい内容</label>
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                プログラミング
-                <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <li><a href="#">プログラミング</a></li>
-                <li><a href="#">Python</a></li>
-                <li><a href="#">C++</a></li>
-              </ul>
-          </div>
-          <div class="dropdown">
-            <label>エリア</label>
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                広島
-                <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <li><a href="#">広島</a></li>
-                <li><a href="#">呉</a></li>
-                <li><a href="#">東広島</a></li>
-              </ul>
-          </div>
+          <form class="form-horizontal">
+            <div class="form-group">
+              <label for="yurukai_title" class="col-sm-2 control-label">ゆる会名</label>
+              <div class="col-sm-10">
+                <input id="yurukai_title" type="text" class="form-control" placeholder="初めの第一歩">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">学びたい内容</label>
+              <div class="col-sm-10">
+                <select id="testSelect" class="form-control">
+                  <option>プログラミング</option>
+                  <option>Python</option>
+                  <option>C++</option>
+                </select>
+              </div>
+            </div>
 
-          <div class="form-group">
-            <label>開催日時</label>
-              開催日 : 開始時刻 ～ 終了時刻
-              <textarea name="" id="schedule" cols="30" rows="10"></textarea>
-              <span id="datepicker"/>
-          </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">エリア</label>
+              <div class="col-sm-10">
+                <select id="testSelect" class="form-control">
+                  <option>広島</option>
+                  <option>呉</option>
+                  <option>東広島</option>
+                </select>
+              </div>
+            </div>
 
-          <div class="form-group">
-            <label>備考</label>
-            <input type="text" class="form-control" placeholder="強くなりたいです！">
-          </div>
-          <button type="button" class="btn btn-success">登録</button>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">開催日時</label>
+              <div class="col-sm-10">
+                <div>開催日 : 開始時刻 ～ 終了時刻</div>
+                <table>
+                  <tr>
+                    <td>
+                      <textarea name="" id="schedule" cols="30" rows="10"></textarea>
+                    </td>
+                    <td>
+                      <span id="datepicker"/>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-2 control-label">備考</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" placeholder="強くなりたいです！">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <span class="col-sm-2"></span>
+              <div class="col-sm-10">
+                <button type="button" class="btn btn-success">登録</button>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
