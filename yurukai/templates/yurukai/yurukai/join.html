@@ -14,7 +14,10 @@
         {{ data.schedule.start_time }}
         {{ data.form.as_p }}
         {% endfor %}
-        <input type="submit">
+        {% endfor %}
+        <label for="is_teacher">教える</label>
+        <input type="checkbox" name="is_teacher" class="form-control" name="is_teacher">
+        <button type="submit" class="btn btn-success btn-lg">登録</button>
       </form>
     </div>
   </div>
