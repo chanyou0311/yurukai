@@ -5,7 +5,7 @@
   {% for object in object_list%}
   <div class="panel panel-default">
     <div class="panel-heading">
-      <a href="/{{object.id}}">{{ object.name }}</a>
+      <a href="{% url 'yurukai:yurukai_detail' object.pk %}">{{ object.name }}</a>
     </div>
     <div class="panel-body">
       <p>エリア: {{ object.area.name }}</p>

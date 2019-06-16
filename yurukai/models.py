@@ -49,7 +49,7 @@ class Yurukai(AbstractModel):
     area = models.ForeignKey(Area, on_delete=models.PROTECT)
 
     def get_absolute_url(self):
-        return reverse("yurukai:detail", kwargs={'pk': self.pk})
+        return reverse("yurukai:yurukai_detail", kwargs={'pk': self.pk})
 
 
 class Schedule(AbstractModel):
