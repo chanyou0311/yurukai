@@ -53,6 +53,8 @@
         <div class="form-group">
           <div class="col-sm-2"></div>
           <div class="col-sm-10">
+            <label for="is_teacher">教える</label>
+            <input type="checkbox" name="is_teacher" class="form-control" name="is_teacher">
             <button type="submit" class="btn btn-success">登録</button>
           </div>
         </div>
@@ -62,13 +64,26 @@
   </div>
 </div>
 <script>
-  $('.group-schedule input').on('change', function (event){
+  $('.group-schedule input').on('blur', function (event){
     var target = $(event.currentTarget);
     var group = target.closest('.group-schedule');
     var now_index = group.data('group_index');
     var nextGroup =  group.siblings('[data-group_index="' + (now_index + 1) + '"]');
-    nextGroup.removeClass('hide');
-  })
+
+
+    var count = 0;
+    group.find('input[type="text"]').each(function(index, element){
+      if ($(element).val() != "") {
+        count ++;
+      }
+    });
+    
+    console.log(count);
+    
+    if (count >= 2) {
+      nextGroup.removeClass('hide');
+    }
+  });
   
   $('.btn-schedule-add').on('click', function (){
     var hideGroup = $('.group-schedule.hide:first');
