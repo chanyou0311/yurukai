@@ -11,13 +11,19 @@
       <table class="table">
         <thead>
           <tr>
+            <th></th>
+            {% for entry in object.schedule_set.all.0.entry_set.all %}
+              <th>{{ entry.is_teacher|yesno:'教える,学ぶ' }}</th>
+            {% endfor %}
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
             <th>開催日時</th>
             {% for user in object.schedule_set.all.0.members.all %}
             <th>{{ user.name }}</th>
             {% endfor %}
           </tr>
-        </thead>
-        <tbody>
           {% for schedule in object.schedule_set.all %}
           <tr>
             <td>{{ schedule.start_time }}</td>
