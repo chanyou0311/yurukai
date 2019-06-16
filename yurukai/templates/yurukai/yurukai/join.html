@@ -20,11 +20,16 @@
           </div>
         </div>
         {% endif %}
-        {% for data in dataset %}
-        {{ data.schedule.start_time }}
-        {{ data.form.as_p }}
-        {% endfor %}
-        {% endfor %}
+        <div class="form-group">
+          <div class="col-sm-10">
+            {% for data in dataset %}
+            {% for field in data.form %}
+            <label for="is_teacher">{{ data.schedule.start_time }}</label>
+            <input type="checkbox" name="is_join_{{ forloop.parentloop.counter0 }}" class="form-control" name="is_join_{{ forloop.parentloop.counter0 }}">
+            {% endfor %}
+            {% endfor %}
+          </div>
+        </div>
         <div class="form-group">
           <label class="col-sm-2 control-label" for="is_teacher">教える</label>
           <div class="col-sm-10">
