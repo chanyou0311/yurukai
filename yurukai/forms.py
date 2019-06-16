@@ -2,7 +2,7 @@ from django import forms
 
 from bootstrap_datepicker_plus import DateTimePickerInput
 
-from .models import Area, Yurukai, Schedule, User
+from .models import Area, Yurukai, Schedule, User, Entry
 
 
 class ModelFormWithFormSetMixin:
@@ -84,3 +84,33 @@ class YurukaiForm(ModelFormWithFormSetMixin, forms.ModelForm):
     class Meta:
         model = Yurukai
         fields = ["name", "area", "note"]
+
+
+class YurukaiJoinForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop("user")
+        super(YurukaiForm, self).__init__(*args, **kwargs)
+        if self.user.is_anonymous:
+            self.fields["user_name"] = forms.CharField(label="ユーザー名")
+        for field in self.fields.values():
+            field.widget.attrs["class"] = "form-control"
+
+    class Meta:
+        model = Yurukai
+        fields = ["name", "area", "note"]
+
+
+class EntryForm(forms.ModelForm):
+    is_join = forms.BooleanField(initial=True, required=False)
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop("user")
+        self.schedule_instance = kwargs.pop("schedule_instance")
+
+        super(EntryForm, self).__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs["class"] = "form-control"
+
+    class Meta:
+        model = Entry
+        fields = ["is_join"]
