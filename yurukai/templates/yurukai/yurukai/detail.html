@@ -6,11 +6,28 @@
     <div class="panel-heading">{{ object.name }}</div>
     <div class="panel-body">
       <p>エリア: {{ object.area.name }}</p>
-      {% for schedule in object.schedule_set.all %}
-      <p>開始日時: {{ schedule.start_time }}</p>
-      <p>参加人数: {{ schedule.members.count }}</p>
-      {% endfor %}
       <p>備考: {{ object.note }}</p>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>開催日時</th>
+            {% for user in object.schedule_set.all.0.members.all %}
+              <th>{{ user.name }}</th>
+            {% endfor %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for schedule in object.schedule_set.all %}
+          <tr>
+            <td>{{ schedule.start_time }}</td>
+            {% for entry in schedule.entry_set.all%}
+              <td>{{entry.is_join}}</td>
+            {% endfor %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
