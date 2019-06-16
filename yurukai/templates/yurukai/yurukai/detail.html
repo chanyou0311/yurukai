@@ -6,6 +6,7 @@
     <div class="panel-heading">{{ object.name }}</div>
     <div class="panel-body">
       <p>エリア: {{ object.area.name }}</p>
+      <p>備考: {{ object.note }}</p>
 
       <table class="table">
         <thead>
@@ -13,20 +14,15 @@
             <th>開催日時</th>
             {% for user in object.schedule_set.all.0.members.all %}
               <th>{{ user.name }}</th>
-
             {% endfor %}
           </tr>
         </thead>
-        <p>備考: {{ object.note }}</p>
         <tbody>
           {% for schedule in object.schedule_set.all %}
           <tr>
             <td>{{ schedule.start_time }}</td>
-            {% for user in object.schedule_set.all.0.members.all%}
-              <!-- <td>{{ entry.is_join }}</td> -->
-              <!-- <td>{{forloop.counter0}}</td> -->
-              <!-- <td>{{object.schedule_set.all.1.entry_set.all.forloop.counter0.is_join}}</td> -->
-              <td>{{object.schedule_set.all.1.entry_set.all.1.is_join}}</td>
+            {% for entry in schedule.entry_set.all%}
+              <td>{{entry.is_join}}</td>
             {% endfor %}
           </tr>
           {% endfor %}
