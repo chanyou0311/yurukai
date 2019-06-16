@@ -87,7 +87,6 @@ class YurukaiForm(ModelFormWithFormSetMixin, forms.ModelForm):
 
 
 class YurukaiJoinForm(forms.ModelForm):
-
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop("user")
         super(YurukaiForm, self).__init__(*args, **kwargs)
@@ -102,7 +101,10 @@ class YurukaiJoinForm(forms.ModelForm):
 
 
 class EntryForm(forms.ModelForm):
-    is_join = forms.BooleanField(initial=True, required=False)
+    is_join = forms.BooleanField(
+        initial=True, required=False, widget=forms.CheckboxInput()
+    )
+
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop("user")
         self.schedule_instance = kwargs.pop("schedule_instance")

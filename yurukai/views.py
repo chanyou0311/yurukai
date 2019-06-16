@@ -33,8 +33,16 @@ class YurukaiJoinView(TemplateView):
 
     def post(self, request, *args, **kwargs):
         print(request.POST)
-        print(self.kwargs)
         pk = self.kwargs["pk"]
+        yurukai_instance = Yurukai.objects.get(pk=pk)
+        schedule_query = Schedule.objects.filter(yurukai=yurukai_instance)
+        data = request.POST
+        user = request.user
+        for count, schedule_instance in enumerate(schedule_query):
+            is_join = data.get(f"is_join_{count}") == "on"
+            Entry.objects.create(
+                user=user, schedule=schedule_instance, is_join=is_join, is_teacher=False
+            )
         return redirect("yurukai:yurukai_detail", pk=pk)
         # pk = self.kwargs["pk"]
         # return redirect("yurukai:yurukai_detail", pk=pk)
