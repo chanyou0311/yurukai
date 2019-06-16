@@ -38,26 +38,13 @@ class YurukaiJoinView(TemplateView):
         schedule_query = Schedule.objects.filter(yurukai=yurukai_instance)
         data = request.POST
         user = request.user
+        is_teacher = data.get("is_teacher") == "on"
         for count, schedule_instance in enumerate(schedule_query):
             is_join = data.get(f"is_join_{count}") == "on"
             Entry.objects.create(
-                user=user, schedule=schedule_instance, is_join=is_join, is_teacher=False
+                user=user, schedule=schedule_instance, is_join=is_join, is_teacher=is_teacher
             )
         return redirect("yurukai:yurukai_detail", pk=pk)
-        # pk = self.kwargs["pk"]
-        # return redirect("yurukai:yurukai_detail", pk=pk)
-
-        if form.is_valid():
-            pk = self.kwargs["pk"]
-            return redirect("yurukai:yurukai_detail", pk=pk)
-        else:
-            self.object = self.get_object()
-            return self.form_invalid(form)
-
-    # def get_form_kwargs(self):
-    #     kwargs = super(YurukaiJoinView, self).get_form_kwargs()
-    #     kwargs["user"] = self.request.user
-    #     return kwargs
 
 
 class YurukaiCreateView(CreateView):
@@ -73,15 +60,14 @@ class YurukaiCreateView(CreateView):
             user_name = form.cleaned_data["user_name"]
             user_instance = User.objects.create(username=user_name)
         yurukai_instance = Yurukai.objects.last()
-        print(yurukai_instance)
         schedule_query = Schedule.objects.filter(yurukai=yurukai_instance)
-        print(schedule_query)
+        is_teacher = self.request.POST.get("is_teacher") == "on"
         for schedule_instance in schedule_query:
             Entry.objects.create(
                 user=user_instance,
                 schedule=schedule_instance,
                 is_join=True,
-                is_teacher=False,
+                is_teacher=is_teacher,
             )
         return redirect_url
 
