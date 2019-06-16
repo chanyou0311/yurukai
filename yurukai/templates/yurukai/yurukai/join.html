@@ -12,12 +12,8 @@
         {% csrf_token %}
         {% for data in dataset %}
         {{ data.schedule.start_time }}
-        {% for field in data.form %}
-        <input type="checkbox" name="is_join_{{ forloop.parentloop.counter0 }}" class="form-control" name="is_join_{{ forloop.parentloop.counter0 }}">
+        {{ data.form.as_p }}
         {% endfor %}
-        {% endfor %}
-        <label for="is_teacher">教える</label>
-        <input type="checkbox" name="is_teacher" class="form-control" name="is_teacher">
         <input type="submit">
       </form>
     </div>
