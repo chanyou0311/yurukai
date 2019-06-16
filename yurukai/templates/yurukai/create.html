@@ -3,16 +3,19 @@
 {% block content %}
 {{ form.media }}
 {{ form.formset.media }}
+
 <div class="container">
   <div class="panel panel-default">
     <div class="panel-heading">{{ object.name }}</div>
     <div class="panel-body">
     <form method="post">
       {% csrf_token %}
-      <table>
-        {{ form.as_p }}
-        {{ form.formset.as_p }}
-      </table>
+      {{ form.formset.management_form }}
+      {{ form.as_p }}
+      {% for schedule_form in form.formset %}
+      <label>スケジュール {{ forloop.counter }}</label>
+      {{ schedule_form.as_p }}
+      {% endfor %}
       <input type="submit">
     </form>
     </div>

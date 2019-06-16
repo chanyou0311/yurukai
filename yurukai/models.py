@@ -24,6 +24,9 @@ class AbstractModel(models.Model):
 class Area(AbstractModel):
     name = models.CharField(max_length=120, unique=True)
 
+    def __str__(self):
+        return self.name
+
 
 class User(AbstractUser, AbstractModel):
     name = models.CharField(_("Name of User"), max_length=120)
@@ -42,14 +45,21 @@ class User(AbstractUser, AbstractModel):
 class Tag(AbstractModel):
     name = models.CharField(max_length=120)
 
+    def __str__(self):
+        return self.name
+
 
 class Yurukai(AbstractModel):
     name = models.CharField(max_length=120)
     tag = models.ManyToManyField(Tag, blank=True)
     area = models.ForeignKey(Area, on_delete=models.PROTECT)
+    note = models.TextField(blank=True)
 
     def get_absolute_url(self):
-        return reverse("yurukai:yurukai_detail", kwargs={'pk': self.pk})
+        return reverse("yurukai:yurukai_detail", kwargs={"pk": self.pk})
+
+    def __str__(self):
+        return self.name
 
 
 class Schedule(AbstractModel):
