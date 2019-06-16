@@ -2,7 +2,7 @@ from django import forms
 
 from bootstrap_datepicker_plus import DateTimePickerInput
 
-from .models import Area, Yurukai, Schedule
+from .models import Area, Yurukai, Schedule, User
 
 
 class ModelFormWithFormSetMixin:
@@ -35,6 +35,9 @@ class ScheduleForm(forms.ModelForm):
         widget=DateTimePickerInput(format="%Y/%m/%d %H:%M"),
         input_formats=["%Y/%m/%d %H:%M"],
     )
+    members = forms.ModelMultipleChoiceField(
+        User.objects.all(), widget=forms.HiddenInput, required=False
+    )
 
     def __init__(self, *args, **kwargs):
         super(ScheduleForm, self).__init__(*args, **kwargs)
@@ -43,12 +46,25 @@ class ScheduleForm(forms.ModelForm):
 
     class Meta:
         model = Schedule
-        fields = ["yurukai", "start_time", "end_time"]
+        fields = ["yurukai", "start_time", "end_time", "members"]
 
 
 ScheduleFormSet = forms.inlineformset_factory(
     parent_model=Yurukai, model=Schedule, form=ScheduleForm, extra=5, can_delete=False
 )
+
+
+class AnonymousUserForm(forms.ModelForm):
+    name = forms.CharField(label="ユーザー名")
+
+    def __init__(self, *args, **kwargs):
+        super(AnonymousUserForm, self).__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs["class"] = "form-control"
+
+    class Meta:
+        model = User
+        fields = ["name"]
 
 
 class YurukaiForm(ModelFormWithFormSetMixin, forms.ModelForm):
@@ -58,7 +74,10 @@ class YurukaiForm(ModelFormWithFormSetMixin, forms.ModelForm):
     note = forms.CharField(label="備考", widget=forms.TextInput(), required=False)
 
     def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop("user")
         super(YurukaiForm, self).__init__(*args, **kwargs)
+        if self.user.is_anonymous:
+            self.fields["user_name"] = forms.CharField(label="ユーザー名")
         for field in self.fields.values():
             field.widget.attrs["class"] = "form-control"
 

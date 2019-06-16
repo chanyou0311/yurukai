@@ -8,17 +8,14 @@
   <div class="panel panel-default">
     <div class="panel-heading">{{ object.name }}</div>
     <div class="panel-body">
-
     <form class="form-horizontal" method="post">
-        {% csrf_token %}
-        {{ form.formset.management_form }}
-        {{ form.as_p }}
-
-      
+      {% csrf_token %}
+      {{ form.formset.management_form }}
+      {{ form.as_p }}
+      {{ anonymous_user_form.as_p }}
       {% for schedule_form in form.formset %}
       <span>
       スケジュール {{ forloop.counter }}
-        
       {% for field in schedule_form %}
         {% if field.name == 'start_time' or field.name == 'end_time' %}
       <div class="form-group">

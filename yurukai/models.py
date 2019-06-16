@@ -22,7 +22,7 @@ class AbstractModel(models.Model):
 
 
 class Area(AbstractModel):
-    name = models.CharField(max_length=120, unique=True)
+    name = models.CharField(max_length=120)
 
     def __str__(self):
         return self.name
