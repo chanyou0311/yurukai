@@ -44,20 +44,6 @@ class YurukaiJoinView(TemplateView):
                 user=user, schedule=schedule_instance, is_join=is_join, is_teacher=False
             )
         return redirect("yurukai:yurukai_detail", pk=pk)
-        # pk = self.kwargs["pk"]
-        # return redirect("yurukai:yurukai_detail", pk=pk)
-
-        if form.is_valid():
-            pk = self.kwargs["pk"]
-            return redirect("yurukai:yurukai_detail", pk=pk)
-        else:
-            self.object = self.get_object()
-            return self.form_invalid(form)
-
-    # def get_form_kwargs(self):
-    #     kwargs = super(YurukaiJoinView, self).get_form_kwargs()
-    #     kwargs["user"] = self.request.user
-    #     return kwargs
 
 
 class YurukaiCreateView(CreateView):
