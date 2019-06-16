@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.urls import reverse
 
 
 class AbstractManager(models.Manager):
@@ -46,6 +47,9 @@ class Yurukai(AbstractModel):
     name = models.CharField(max_length=120)
     tag = models.ManyToManyField(Tag, blank=True)
     area = models.ForeignKey(Area, on_delete=models.PROTECT)
+
+    def get_absolute_url(self):
+        return reverse("yurukai:detail", kwargs={'pk': self.pk})
 
 
 class Schedule(AbstractModel):

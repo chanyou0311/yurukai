@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "d2234ed3c85b86e50687baf59a78ed787fc3768eecab6fd182a17249d3cc3b5c"
+            "sha256": "03c99fa5ebaf78cc43da13d74204e12ef001091d0584d222a6d4c9194b58c20f"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -51,6 +51,21 @@
             ],
             "index": "pypi",
             "version": "==0.39.1"
+        },
+        "django-bootstrap-datepicker-plus": {
+            "hashes": [
+                "sha256:490058eba99d47f48a7d24fa78581c0e36375bdc7aa9605783eeb170d51fd0df",
+                "sha256:a8bc19cc6846f97ff1e6c447f4e0387881d16e8afa1e8bd7a652c19e545c566b"
+            ],
+            "index": "pypi",
+            "version": "==3.0.5"
+        },
+        "django-bootstrap4": {
+            "hashes": [
+                "sha256:9f115534ae8d052d397201f3d716c10d7c9832b422e44dd7382418c6f274df18"
+            ],
+            "index": "pypi",
+            "version": "==0.0.8"
         },
         "idna": {
             "hashes": [

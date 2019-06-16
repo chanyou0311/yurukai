@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "allauth.socialaccount.providers.twitter",
+    "bootstrap4",
+    "bootstrap_datepicker_plus",
     "yurukai",
 ]
 
@@ -149,3 +151,8 @@ SITE_ID = os.environ.get("SITE_ID", 1)
 
 # LOGIN_URL = "/"
 # LOGIN_REDIRECT_URL = "/"
+
+# Bootstrap settings
+BOOTSTRAP4 = {
+    'include_jquery': True,
+}
