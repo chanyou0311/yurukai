@@ -1,0 +1,38 @@
+{% extends 'yurukai/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            まずはゆる会を作ってみましょう
+        </div>
+        <div class="panel-body">
+            <p><a class="btn btn-primary btn-lg" href="{% url 'yurukai:yurukai_create' %}" role="button">ゆる会を作成</a></p>
+        </div>
+    </div>
+
+  {% for object in object_list%}
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <a href="{% url 'yurukai:yurukai_detail' object.pk %}">{{ object.name }}</a>
+    </div>
+    <div class="panel-body">
+      <p>エリア: {{ object.area.name }}</p>
+      {% if object.schedule_set.all %}
+        <p>開始日時: {{ object.schedule_set.all.0.start_time }}</p>
+        <p>参加人数: {{ object.schedule_set.all.0.members.count }}</p>
+      {% endif %}
+
+{% comment %}
+      {% for schedule in object.schedule_set.all %}
+      <p>開始日時: {{ schedule.start_time }}</p>
+      <p>参加人数: {{ schedule.members.count }}</p>
+      {% endfor %}
+{% endcomment %}
+
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
