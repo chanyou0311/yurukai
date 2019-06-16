@@ -12,6 +12,7 @@
       {% csrf_token %}
       {{ form.formset.management_form }}
       {{ form.as_p }}
+      {{ anonymous_user_form.as_p }}
       {% for schedule_form in form.formset %}
       <label>スケジュール {{ forloop.counter }}</label>
       {{ schedule_form.as_p }}
