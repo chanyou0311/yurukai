@@ -25,7 +25,7 @@
         {{ anonymous_user_form.as_p }}
 
         {% for schedule_form in form.formset %}
-        <span>
+        <span class="{% if forloop.counter0 > 0 %}hide {% endif %}group-schedule" data-group_index="{{ forloop.counter0 }}">
       スケジュール {{ forloop.counter }}
         
       {% for field in schedule_form %}
@@ -54,4 +54,13 @@
     </div>
   </div>
 </div>
+<script>
+  $('.group-schedule input').on('change', function (event){
+    var target = $(event.currentTarget);
+    var group = target.closest('.group-schedule');
+    var now_index = group.data('group_index');
+    var nextGroup =  group.siblings('[data-group_index="' + (now_index + 1) + '"]');
+    nextGroup.removeClass('hide');
+  })
+</script>
 {% endblock %}
