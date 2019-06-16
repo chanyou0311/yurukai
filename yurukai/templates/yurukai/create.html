@@ -1,6 +1,8 @@
 {% extends 'yurukai/base.html' %}
 
 {% block content %}
+{{ form.media }}
+{{ form.formset.media }}
 <div class="container">
   <div class="panel panel-default">
     <div class="panel-heading">{{ object.name }}</div>
@@ -9,6 +11,7 @@
       {% csrf_token %}
       <table>
         {{ form.as_p }}
+        {{ form.formset.as_p }}
       </table>
       <input type="submit">
     </form>

@@ -21,7 +21,6 @@ class YurukaiCreateView(CreateView):
     form_class = YurukaiForm
 
 
-
 def about(request):
     return render(request, "yurukai/about.html")
 
