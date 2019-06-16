@@ -7,17 +7,17 @@ from .forms import YurukaiForm
 
 class IndexView(ListView):
     model = Yurukai
-    template_name = "yurukai/index.html"
+    template_name = "yurukai/yurukai/list.html"
 
 
 class YurukaiDetailView(DetailView):
     model = Yurukai
-    template_name = "yurukai/detail.html"
+    template_name = "yurukai/yurukai/detail.html"
 
 
 class YurukaiCreateView(CreateView):
     model = Yurukai
-    template_name = "yurukai/create.html"
+    template_name = "yurukai/yurukai/create.html"
     form_class = YurukaiForm
 
 
