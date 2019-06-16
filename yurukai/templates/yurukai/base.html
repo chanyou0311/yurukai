@@ -10,14 +10,18 @@
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
           <a class="navbar-brand" href="{% url 'yurukai:index' %}">ゆる会</a>
         </div>
-      </div>
+
+{% comment %}
+いったんログイン画面ができるまでコメントアウトしています
+        <a href="#" class="btn btn-default navbar-btn navbar-right">Sign in</a>
+        <span class="navbar-text navbar-right">
+            Signed in as 
+          </span>
+{% endcomment %}
+
+      </div>
     </nav>
     {% block content %}
     {% endblock %}
