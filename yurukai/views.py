@@ -1,8 +1,8 @@
-from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView
+from django.shortcuts import render, redirect
+from django.views.generic import ListView, DetailView, CreateView, TemplateView
 
 from .models import Yurukai, User, Entry, Schedule
-from .forms import YurukaiForm
+from .forms import YurukaiForm, EntryForm
 
 
 class IndexView(ListView):
@@ -13,6 +13,43 @@ class IndexView(ListView):
 class YurukaiDetailView(DetailView):
     model = Yurukai
     template_name = "yurukai/yurukai/detail.html"
+
+
+class YurukaiJoinView(TemplateView):
+    template_name = "yurukai/yurukai/join.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        pk = self.kwargs["pk"]
+        yurukai_instance = Yurukai.objects.get(pk=pk)
+        context["dataset"] = []
+        schedule_query = Schedule.objects.filter(yurukai=yurukai_instance)
+        for schedule_instance in schedule_query:
+            form = EntryForm(
+                user=self.request.user, schedule_instance=schedule_instance
+            )
+            context["dataset"].append({"form": form, "schedule": schedule_instance})
+        return context
+
+    def post(self, request, *args, **kwargs):
+        print(request.POST)
+        print(self.kwargs)
+        pk = self.kwargs["pk"]
+        return redirect("yurukai:yurukai_detail", pk=pk)
+        # pk = self.kwargs["pk"]
+        # return redirect("yurukai:yurukai_detail", pk=pk)
+
+        if form.is_valid():
+            pk = self.kwargs["pk"]
+            return redirect("yurukai:yurukai_detail", pk=pk)
+        else:
+            self.object = self.get_object()
+            return self.form_invalid(form)
+
+    # def get_form_kwargs(self):
+    #     kwargs = super(YurukaiJoinView, self).get_form_kwargs()
+    #     kwargs["user"] = self.request.user
+    #     return kwargs
 
 
 class YurukaiCreateView(CreateView):
@@ -61,10 +98,6 @@ def join_s(request):
 
 def join_t(request):
     return render(request, "yurukai/join_t.html")
-
-
-def join_s_conf(request):
-    return render(request, "yurukai/join_s_conf.html")
 
 
 def join_t_conf(request):

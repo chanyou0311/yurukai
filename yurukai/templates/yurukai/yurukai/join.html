@@ -1,0 +1,22 @@
+{% extends 'yurukai/base.html' %}
+
+{% block content %}
+{{ form.media }}
+{{ form.formset.media }}
+
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">{{ object.name }}</div>
+    <div class="panel-body">
+      <form class="form-horizontal" method="post">
+        {% csrf_token %}
+        {% for data in dataset %}
+        {{ data.schedule.start_time }}
+        {{ data.form.as_p }}
+        {% endfor %}
+        <input type="submit">
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
