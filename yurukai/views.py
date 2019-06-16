@@ -37,12 +37,19 @@ class YurukaiJoinView(TemplateView):
         yurukai_instance = Yurukai.objects.get(pk=pk)
         schedule_query = Schedule.objects.filter(yurukai=yurukai_instance)
         data = request.POST
-        user = request.user
+        if self.request.user.is_authenticated:
+            user_instance = self.request.user
+        else:
+            user_name = data.get("user_name")
+            user_instance = User.objects.create(username=user_name)
         is_teacher = data.get("is_teacher") == "on"
         for count, schedule_instance in enumerate(schedule_query):
             is_join = data.get(f"is_join_{count}") == "on"
             Entry.objects.create(
-                user=user, schedule=schedule_instance, is_join=is_join, is_teacher=is_teacher
+                user=user_instance,
+                schedule=schedule_instance,
+                is_join=is_join,
+                is_teacher=is_teacher,
             )
         return redirect("yurukai:yurukai_detail", pk=pk)
 
